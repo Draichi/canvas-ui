@@ -14,6 +14,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { Snackbar } from "@mui/material";
 
 interface Shape {
   id: string;
@@ -277,41 +278,15 @@ export const Canvas: FC<CanvasProps> = ({
 
           {/* Transformer */}
           <Transformer ref={transformerRef} />
-
-          {/* Connection Controls */}
-          {connectFromId && (
-            <Rect
-              x={10}
-              y={window.innerHeight - 50}
-              width={150}
-              height={30}
-              fill="#FF0000"
-              cornerRadius={5}
-              onClick={() => setConnectFromId(null)}
-            />
-          )}
         </Layer>
       </Stage>
 
       {/* Connection Instructions */}
-      {connectFromId && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: 20,
-            left: 20,
-            padding: "10px",
-            backgroundColor: "#FF0000",
-            color: "#fff",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-          onClick={() => setConnectFromId(null)}
-        >
-          Connecting from <strong>{connectFromId}</strong>. Click another shape
-          to connect.
-        </div>
-      )}
+      <Snackbar
+        open={Boolean(connectFromId)}
+        message={`Connecting from ${connectFromId}. Click another shape to connect.`}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      />
     </>
   );
 };
