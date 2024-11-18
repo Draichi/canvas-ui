@@ -10,6 +10,7 @@ import { getAdjustedPosition } from "../utils/arrows";
 import { FC, useRef, useEffect, useState } from "react";
 import { Snackbar } from "@mui/material";
 import { CanvasProps } from "../types/canvas";
+import { useDrag } from "../hooks/useDrag";
 
 export const Canvas: FC<CanvasProps> = ({
   shapes,
@@ -25,10 +26,19 @@ export const Canvas: FC<CanvasProps> = ({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [connectFromId, setConnectFromId] = useState<string | null>(null);
   const transformerRef = useRef<any>(null);
-
   const layerRef = useRef<any>(null);
 
-  useEffect(() => {
+  const { handleDragStart, handleDragEnd, handleDragMove, handleTransformEnd } =
+    useDrag({
+      shapes,
+      setShapes,
+      setSelectedId,
+    });
+
+  /**
+   * Enable transformer when a shape is selected so you can resize it
+   */
+  function enableTransformer() {
     if (selectedId && transformerRef.current) {
       const selectedNode = layerRef.current.findOne(`#${selectedId}`);
       if (selectedNode) {
@@ -39,8 +49,13 @@ export const Canvas: FC<CanvasProps> = ({
       transformerRef.current.nodes([]);
       transformerRef.current.getLayer().batchDraw();
     }
-  }, [selectedId, shapes]);
+  }
 
+  useEffect(enableTransformer, [selectedId, shapes]);
+
+  /**
+   * Handle stage click to select a shape or clear selection
+   */
   const handleStageClick = (e: any) => {
     if (e.target === e.target.getStage()) {
       setSelectedId(null);
@@ -62,61 +77,6 @@ export const Canvas: FC<CanvasProps> = ({
         setSelectedId(clickedId);
       }
     }
-  };
-
-  const handleTransformEnd = (e: any) => {
-    const id = e.target.id();
-    const node = e.target;
-    const scaleX = node.scaleX();
-    const scaleY = node.scaleY();
-    node.scaleX(scaleX);
-    node.scaleY(scaleY);
-
-    setShapes((prevShapes) =>
-      prevShapes.map((shape) =>
-        shape.id === id
-          ? {
-              ...shape,
-              x: node.x(),
-              y: node.y(),
-              scaleX: scaleX,
-              scaleY: scaleY,
-              rotation: node.rotation(),
-            }
-          : shape
-      )
-    );
-  };
-
-  const handleDragStart = (e: any) => {
-    const id = e.target.id();
-    setShapes(
-      shapes.map((shape) => ({
-        ...shape,
-        isDragging: shape.id === id,
-      }))
-    );
-    setSelectedId(id);
-  };
-
-  const handleDragEnd = () => {
-    setShapes(
-      shapes.map((shape) => ({
-        ...shape,
-        isDragging: false,
-      }))
-    );
-  };
-
-  const handleDragMove = (e: any) => {
-    const id = e.target.id();
-    const newX = e.target.x();
-    const newY = e.target.y();
-    setShapes(
-      shapes.map((shape) =>
-        shape.id === id ? { ...shape, x: newX, y: newY } : shape
-      )
-    );
   };
 
   return (
@@ -211,12 +171,10 @@ export const Canvas: FC<CanvasProps> = ({
             )
           )}
 
-          {/* Transformer */}
           <Transformer ref={transformerRef} />
         </Layer>
       </Stage>
 
-      {/* Connection Instructions */}
       <Snackbar
         open={Boolean(connectFromId)}
         message={`Connecting from ${connectFromId}. Click another shape to connect.`}
