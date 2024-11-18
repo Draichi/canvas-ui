@@ -7,46 +7,9 @@ import {
   Arrow as KonvaArrow,
 } from "react-konva";
 import { getAdjustedPosition } from "../utils/arrows";
-import {
-  FC,
-  Dispatch,
-  SetStateAction,
-  useRef,
-  useEffect,
-  useState,
-} from "react";
+import { FC, useRef, useEffect, useState } from "react";
 import { Snackbar } from "@mui/material";
-
-interface Shape {
-  id: string;
-  x: number;
-  y: number;
-  rotation: number;
-  scaleX: number;
-  scaleY: number;
-  isDragging: boolean;
-  type: "square" | "circle";
-}
-
-interface ArrowType {
-  id: string;
-  from: string;
-  to: string;
-}
-
-interface CanvasProps {
-  shapes: Shape[];
-  setShapes: Dispatch<SetStateAction<Shape[]>>;
-  arrows: ArrowType[];
-  setArrows: Dispatch<SetStateAction<ArrowType[]>>;
-  addArrow: (fromId: string, toId: string) => void;
-  deleteArrow: (id: string) => void;
-  scale: number;
-  isPanning: boolean;
-  stagePos: { x: number; y: number };
-  setStagePos: (pos: { x: number; y: number }) => void;
-  connectMode: boolean;
-}
+import { CanvasProps } from "../types/canvas";
 
 export const Canvas: FC<CanvasProps> = ({
   shapes,

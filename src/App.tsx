@@ -1,44 +1,10 @@
-// import "./App.css";
 import { useState, useEffect } from "react";
 import { Canvas } from "./components/Canvas";
 import FloatingActionButtons from "./components/FloatingActionButtons";
-import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import BookmarkList from "./components/BookmarkList";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFF9BF",
-    },
-    secondary: {
-      main: "#CB9DF0",
-    },
-    info: {
-      main: "#616155",
-    },
-    success: {
-      main: "#6fffd5",
-    },
-  },
-});
-
-interface Shape {
-  id: string;
-  x: number;
-  y: number;
-  rotation: number;
-  scaleX: number;
-  scaleY: number;
-  isDragging: boolean;
-  type: "square" | "circle";
-}
-
-interface Arrow {
-  id: string;
-  from: string;
-  to: string;
-}
+import { Shape, ArrowType } from "./types/canvas";
+import { theme } from "./utils/theme";
 
 function App() {
   const appState = localStorage.getItem("appState");
@@ -87,7 +53,7 @@ function App() {
     }
   );
 
-  const [arrows, setArrows] = useState<Arrow[]>(() => {
+  const [arrows, setArrows] = useState<ArrowType[]>(() => {
     if (appState) {
       const parsedState = JSON.parse(appState);
       return parsedState.arrows || [];
@@ -204,7 +170,7 @@ function App() {
       return;
     }
 
-    const newArrow: Arrow = {
+    const newArrow: ArrowType = {
       id: `arrow-${Date.now()}`,
       from: fromId,
       to: toId,
