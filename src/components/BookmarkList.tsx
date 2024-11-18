@@ -25,10 +25,9 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
       style={{
         position: "absolute",
         right: 16,
-        top: "50%",
-        transform: "translateY(-50%)",
+        bottom: 16,
         backgroundColor: "#363630",
-        padding: "1rem",
+        padding: "0.8rem",
         borderRadius: "0.5rem",
         zIndex: 50,
         maxHeight: "80vh",
@@ -51,12 +50,12 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
                 aria-label="delete"
                 onClick={() => deleteBookmark(bookmark.id)}
               >
-                <DeleteIcon />
+                <DeleteIcon sx={{ color: "#FFF9BF" }} />
               </IconButton>
             }
           >
-            <ListItemButton onClick={() => loadBookmark(bookmark.state)}>
-              <ListItemText primary={`View ${bookmark.id}`} />
+            <ListItemButton dense onClick={() => loadBookmark(bookmark.state)}>
+              <ListItemText primary={`View - ${bookmark.id}`} />
             </ListItemButton>
           </ListItem>
         ))}

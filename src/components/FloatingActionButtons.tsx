@@ -1,11 +1,7 @@
 import { Stack } from "@mui/material";
-
 import Fab from "@mui/material/Fab";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AddRectangleIcon from "@mui/icons-material/Rectangle";
-import { Bookmark, Clear, ZoomIn, ZoomOut } from "@mui/icons-material";
+import { Bookmark, Clear, Share, ZoomIn, ZoomOut } from "@mui/icons-material";
 import PanToolIcon from "@mui/icons-material/PanTool";
-import LinkIcon from "@mui/icons-material/Link";
 
 interface FloatingActionButtonsProps {
   addCircle: () => void;
@@ -52,7 +48,7 @@ export default function FloatingActionButtons({
         aria-label="add-circle"
         onClick={addCircle}
       >
-        Add Circle <AddCircleIcon sx={{ color: "#4C4A1F", ml: 1 }} />
+        Add Circle
       </Fab>
       <Fab
         color="secondary"
@@ -60,57 +56,57 @@ export default function FloatingActionButtons({
         aria-label="add-rectangle"
         onClick={addRectangle}
       >
-        Add Rectangle <AddRectangleIcon sx={{ color: "#4C4A1F", ml: 1 }} />
+        Add Rectangle
       </Fab>
       <Fab
-        color="secondary"
+        color="info"
         variant="extended"
         aria-label="zoom-in"
         onClick={zoomIn}
       >
-        Zoom In <ZoomIn sx={{ color: "#4C4A1F", ml: 1 }} />
+        Zoom In <ZoomIn sx={{ ml: 1 }} />
       </Fab>
       <Fab
-        color="secondary"
+        color="info"
         variant="extended"
         aria-label="zoom-out"
         onClick={zoomOut}
       >
-        Zoom Out <ZoomOut sx={{ color: "#4C4A1F", ml: 1 }} />
+        Zoom Out <ZoomOut sx={{ ml: 1 }} />
       </Fab>
       <Fab
         onClick={clearCanvas}
-        color="secondary"
+        color="info"
         variant="extended"
         aria-label="clear"
       >
-        Clear <Clear sx={{ color: "#4C4A1F", ml: 1 }} />
+        Clear <Clear sx={{ ml: 1 }} />
       </Fab>
       <Fab
         onClick={bookmarkAppState}
-        color="secondary"
+        color="info"
         variant="extended"
         aria-label="save"
       >
-        Bookmark <Bookmark sx={{ color: "#4C4A1F", ml: 1 }} />
+        Bookmark <Bookmark sx={{ ml: 1 }} />
       </Fab>
       <Fab
-        color={isPanning ? "primary" : "secondary"}
+        color={isPanning ? "success" : "info"}
         variant="extended"
         aria-label="pan"
         onClick={togglePan}
       >
         {isPanning ? "Pan On" : "Pan Off"}
-        <PanToolIcon sx={{ color: "#4C4A1F", ml: 1 }} />
+        <PanToolIcon sx={{ ml: 1 }} />
       </Fab>
       <Fab
-        color={connectMode ? "primary" : "secondary"}
+        color={connectMode ? "success" : "info"}
         variant="extended"
         aria-label="connect"
         onClick={toggleConnectMode}
       >
-        {connectMode ? "Disconnect" : "Connect Shapes"}
-        <LinkIcon sx={{ color: "#4C4A1F", ml: 1 }} />
+        {connectMode ? "Connect On" : "Connect Off"}
+        <Share sx={{ ml: 1 }} />
       </Fab>
     </Stack>
   );

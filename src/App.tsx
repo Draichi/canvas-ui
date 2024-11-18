@@ -14,6 +14,12 @@ const theme = createTheme({
     secondary: {
       main: "#CB9DF0",
     },
+    info: {
+      main: "#616155",
+    },
+    success: {
+      main: "#6fffd5",
+    },
   },
 });
 
@@ -154,6 +160,7 @@ function App() {
       scale,
       isPanning,
       stagePos,
+      arrows,
     };
     localStorage.setItem(bookmarkKey, JSON.stringify(appState));
     setBookmarks((prev) => [...prev, { id: viewId, state: appState }]);
@@ -170,6 +177,7 @@ function App() {
     setScale(state.scale);
     setIsPanning(state.isPanning);
     setStagePos(state.stagePos);
+    setArrows(state.arrows);
   };
 
   const toggleConnectMode = () => {
