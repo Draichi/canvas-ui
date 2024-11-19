@@ -63,10 +63,10 @@ function App() {
 
   const [connectMode, setConnectMode] = useState<boolean>(false);
 
-  const xRange = window.innerWidth * 0.6;
-  const yRange = window.innerHeight * 0.6;
-  const xOffset = window.innerWidth * 0.2;
-  const yOffset = window.innerHeight * 0.2;
+  const xRange = window.innerWidth * 0.4;
+  const yRange = window.innerHeight * 0.4;
+  const xOffset = window.innerWidth * 0.3;
+  const yOffset = window.innerHeight * 0.3;
 
   const addCircle = () => {
     const newCircle: Shape = {
