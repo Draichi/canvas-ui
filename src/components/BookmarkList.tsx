@@ -26,7 +26,7 @@ const BookmarkList: React.FC<BookmarkListProps> = ({
         position: "absolute",
         right: 16,
         bottom: 16,
-        backgroundColor: "#363630",
+        backgroundColor: "#242424",
         padding: "0.8rem",
         borderRadius: "0.5rem",
         zIndex: 50,

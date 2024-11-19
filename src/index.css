@@ -13,6 +13,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.MuiListItemText-primary {
+  color: #fff !important;
+  font-size: 1.2rem !important;
+}
+
+.MuiListItem-root {
+  padding: 0 !important;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
