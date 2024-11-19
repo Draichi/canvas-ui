@@ -63,11 +63,16 @@ function App() {
 
   const [connectMode, setConnectMode] = useState<boolean>(false);
 
+  const xRange = window.innerWidth * 0.6;
+  const yRange = window.innerHeight * 0.6;
+  const xOffset = window.innerWidth * 0.2;
+  const yOffset = window.innerHeight * 0.2;
+
   const addCircle = () => {
     const newCircle: Shape = {
       id: (shapes.length + 1).toString(),
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: xOffset + Math.random() * xRange,
+      y: yOffset + Math.random() * yRange,
       rotation: Math.random() * 180,
       scaleX: 1,
       scaleY: 1,
@@ -84,8 +89,8 @@ function App() {
   const addRectangle = () => {
     const newRectangle: Shape = {
       id: (shapes.length + 1).toString(),
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
+      x: xOffset + Math.random() * xRange,
+      y: yOffset + Math.random() * yRange,
       rotation: Math.random() * 180,
       scaleX: 1,
       scaleY: 1,
